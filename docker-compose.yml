@@ -1,0 +1,25 @@
+services:
+  blog_postgres:
+    container_name: blog_postgres
+    image: postgres:latest
+    ports:
+      - "5440:5432"
+    networks:
+      - blog_go_network
+    environment:
+      POSTGRES_PASSWORD: "blog_go"
+      POSTGRES_USER: "blog_go"
+      POSTGRES_DB: "blog_go"
+    volumes:
+      - blog_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U blog_go
+      interval: 2s
+      timeout: 3s
+      retries: 40
+
+volumes:
+  blog_postgres_data:
+
+networks:
+  blog_go_network:
