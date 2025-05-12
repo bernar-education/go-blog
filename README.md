@@ -4,5 +4,5 @@
 ### For start
 
 ```go
-go run server.go
+go run .
 ```
